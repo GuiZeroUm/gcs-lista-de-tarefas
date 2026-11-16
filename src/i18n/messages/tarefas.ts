@@ -5,6 +5,9 @@ export const tarefas = {
   campoTitulo: "Título",
   campoDescricao: "Descrição (opcional)",
   campoPrioridade: "Prioridade",
+  campoPrazo: "Prazo (opcional)",
+  prazo: (data: string) => `Prazo: ${data}`,
+  atrasada: "Atrasada",
   botaoAdicionar: "Adicionar",
   marcarComoConcluida: "Marcar como concluída",
   marcarComoPendente: "Marcar como pendente",
@@ -23,5 +26,6 @@ export const tarefas = {
     tituloLongo: "O título pode ter no máximo 120 caracteres.",
     descricaoLonga: "A descrição pode ter no máximo 1000 caracteres.",
     prioridadeInvalida: "Escolha uma prioridade válida.",
+    prazoInvalido: "Informe uma data válida.",
   },
 } as const;
