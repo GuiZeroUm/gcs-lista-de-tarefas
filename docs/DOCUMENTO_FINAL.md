@@ -264,7 +264,7 @@ Critérios de aceite da spec de funcionalidades (`docs/specs/08-funcionalidades.
 
 | Verificação | Resultado |
 |---|---|
-| Commit publicado no GitHub Pages = commit da tag `v1.2.0` | ✔ `5bbb14c` = `5bbb14c` (deployment `github-pages`) |
+| Código publicado = código da tag `v1.2.0` | ✔ O deploy da tag foi o commit `5bbb14c` (= `v1.2.0`). Depois dele, só entrou documentação (PR #14): `git diff v1.2.0..main -- src supabase next.config.ts` é vazio |
 | `package.json` = 1.2.0 = tag = Release mais recente | ✔ |
 | Todos os ICs do PGC §3 presentes no repositório | ✔ `src/`, `tests/`, `supabase/migrations/` (2), configs, pipeline, `.env.example`, PGC, ATA_CCB, CHANGELOG, README, DEPLOY, `docs/ARQUITETURA.md`, modelos de processo, documento final |
 | Banco de produção = migrações versionadas | ✔ `information_schema` mostra as 9 colunas das duas migrações (incluindo `prazo date`) |
@@ -302,5 +302,5 @@ O principal aprendizado é que a GCS não é burocracia à parte, e sim o que **
 | 2:30–3:30 | Repositório | PGC (ICs, SemVer, branches, linhas de base); histórico de commits; PRs #3, #4, #11, #12; tags e Releases; `.gitignore` e `.env.example` |
 | 3:30–4:45 | Mudanças | Issues RFC-01 a 04 com análise de impacto; `ATA_CCB.md` (aprovar, condicionar, adiar, rejeitar); Kanban com as colunas; abrir o PR #12 e mostrar `Closes #6` e as condições do CCB verificadas |
 | 4:45–6:00 | Testes e pipeline | Rodar `bun run test:coverage` (87 testes, 98%); no GitHub Actions: testes → build → deploy, resumo da cobertura, artefato; proteção da `main` exigindo `testes` e `build` |
-| 6:00–6:45 | DevOps e segredos | Secrets no GitHub (valores ocultos); `DEPLOY.md`; deployment do Pages apontando para o commit da tag `v1.2.0` |
+| 6:00–6:45 | DevOps e segredos | Secrets no GitHub (valores ocultos); `DEPLOY.md`; deployments do Pages (ambiente `github-pages`) ligados aos commits da `main` |
 | 6:45–7:30 | Auditoria e conclusão | Tabelas FCA/PCA deste documento; uma frase ligando teoria e prática |
