@@ -8,14 +8,15 @@ import { ItemDaTarefa } from "./ItemDaTarefa";
 
 type Propriedades = {
   tarefas: readonly Tarefa[];
+  mensagemDeListaVazia: string;
   aoAlternarConclusao: (tarefa: Tarefa) => void;
   aoEditar: (tarefa: Tarefa) => void;
   aoExcluir: (tarefa: Tarefa) => void;
 };
 
-export function ListaDeTarefas({ tarefas, ...acoes }: Propriedades) {
+export function ListaDeTarefas({ tarefas, mensagemDeListaVazia, ...acoes }: Propriedades) {
   if (tarefas.length === 0) {
-    return <Typography color="text.secondary">{textos.tarefas.listaVazia}</Typography>;
+    return <Typography color="text.secondary">{mensagemDeListaVazia}</Typography>;
   }
   return (
     <ul className="flex flex-col gap-2" aria-label={textos.tarefas.titulo}>
