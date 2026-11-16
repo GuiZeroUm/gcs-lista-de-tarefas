@@ -44,3 +44,4 @@ next-env.d.ts
 # relatórios e evidências geradas localmente
 /coverage
 /test-results
+/.vitest
