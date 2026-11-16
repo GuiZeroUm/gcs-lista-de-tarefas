@@ -1,10 +1,5 @@
-import { EstruturaDaPagina } from "@/components/layout/EstruturaDaPagina";
-import { IndicadorDeCarregamento } from "@/components/ui/IndicadorDeCarregamento";
+import { TelaDeEntrada } from "@/features/auth/components/TelaDeEntrada";
 
 export default function PaginaInicial() {
-  return (
-    <EstruturaDaPagina>
-      <IndicadorDeCarregamento />
-    </EstruturaDaPagina>
-  );
+  return <TelaDeEntrada />;
 }
