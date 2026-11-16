@@ -55,6 +55,24 @@ describe("tela de tarefas (CRUD de ponta a ponta com Supabase simulado)", () => 
     expect(supabase.atual.linhas[0].prioridade).toBe("alta");
   });
 
+  test("cria tarefa com prazo e mostra a data formatada", async () => {
+    await abrirPainel();
+    const formulario = screen.getByRole("button", { name: TEXTOS.botaoAdicionar }).closest("form")!;
+    await userEvent.type(within(formulario).getByLabelText(new RegExp(TEXTOS.campoTitulo)), "Com prazo");
+    await userEvent.type(within(formulario).getByLabelText(TEXTOS.campoPrazo), "2030-05-20");
+    await userEvent.click(within(formulario).getByRole("button", { name: TEXTOS.botaoAdicionar }));
+    await screen.findByText("Com prazo", { selector: "p" });
+    expect(supabase.atual.linhas[0].prazo).toBe("2030-05-20");
+    expect(within(lista()).getByText(TEXTOS.prazo("20/05/2030"))).toBeInTheDocument();
+    expect(within(lista()).queryByText(TEXTOS.atrasada)).not.toBeInTheDocument();
+  });
+
+  test("destaca tarefa pendente com prazo vencido", async () => {
+    supabase.atual.executarOperacao("insert", { titulo: "Vencida", prazo: "2020-01-10" }, null);
+    await abrirPainel();
+    expect(within(lista()).getByText(TEXTOS.atrasada)).toBeInTheDocument();
+  });
+
   test("título vazio não é enviado ao banco", async () => {
     await abrirPainel();
     await userEvent.click(screen.getByRole("button", { name: TEXTOS.botaoAdicionar }));
