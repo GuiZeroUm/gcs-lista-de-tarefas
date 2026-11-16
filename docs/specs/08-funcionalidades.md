@@ -49,11 +49,11 @@
 - Se o Supabase exigir confirmação de e-mail (cadastro sem sessão), mostra o aviso "Confirme o cadastro pelo link enviado ao seu e-mail".
 
 **Critérios de aceite**
-- [ ] Senha errada mostra "E-mail ou senha incorretos." e não libera o acesso.
-- [ ] E-mail inválido é barrado antes de chamar o Supabase.
-- [ ] Cadastro com senha fraca mostra a regra de senha.
-- [ ] E-mail já cadastrado mostra "Este e-mail já está cadastrado".
-- [ ] Quem já está logado e abre `/entrar/` vai para `/tarefas/`.
+- [x] Senha errada mostra "E-mail ou senha incorretos." e não libera o acesso.
+- [x] E-mail inválido é barrado antes de chamar o Supabase.
+- [x] Cadastro com senha fraca mostra a regra de senha.
+- [x] E-mail já cadastrado mostra "Este e-mail já está cadastrado".
+- [x] Quem já está logado e abre `/entrar/` vai para `/tarefas/`.
 
 ### 3.2 Minhas tarefas — `/tarefas/`
 
@@ -65,13 +65,13 @@
 - Lista vazia: "Nenhuma tarefa por aqui. Que tal criar a primeira?"
 
 **Critérios de aceite**
-- [ ] Sem login, a tela não mostra tarefas e leva para `/entrar/`.
-- [ ] Criar salva no banco, aparece na lista e limpa o formulário.
-- [ ] Título vazio não é enviado ao banco.
-- [ ] Editar pelo diálogo atualiza banco e lista.
-- [ ] Concluir atualiza o banco e o resumo.
-- [ ] Excluir só depois de confirmar; cancelar mantém a tarefa.
-- [ ] Um usuário nunca vê nem altera tarefa de outro (RLS).
+- [x] Sem login, a tela não mostra tarefas e leva para `/entrar/`.
+- [x] Criar salva no banco, aparece na lista e limpa o formulário.
+- [x] Título vazio não é enviado ao banco.
+- [x] Editar pelo diálogo atualiza banco e lista.
+- [x] Concluir atualiza o banco e o resumo.
+- [x] Excluir só depois de confirmar; cancelar mantém a tarefa.
+- [x] Um usuário nunca vê nem altera tarefa de outro (RLS).
 
 ## 4. Fluxos especiais
 
