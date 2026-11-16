@@ -2,6 +2,7 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
 import { EstruturaDaPagina } from "@/components/layout/EstruturaDaPagina";
+import { TelaDeEntrada } from "@/features/auth/components/TelaDeEntrada";
 import { textos } from "@/i18n/textos";
 import { renderizarComTema } from "../../support/renderizarComTema";
 
@@ -24,4 +25,8 @@ describe("estrutura da página", () => {
     );
   });
 
+  test("tela de entrada mostra o formulário para visitante", async () => {
+    renderizarComTema(<TelaDeEntrada />);
+    expect(await screen.findByRole("button", { name: textos.auth.botaoEntrar })).toBeInTheDocument();
+  });
 });
