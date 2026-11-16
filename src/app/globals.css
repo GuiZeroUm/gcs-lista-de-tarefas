@@ -1,0 +1,11 @@
+@layer theme, base, mui, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme inline {
+  --color-primaria: var(--mui-palette-primary-main);
+  --color-fundo: var(--mui-palette-background-default);
+  --color-superficie: var(--mui-palette-background-paper);
+  --color-texto: var(--mui-palette-text-primary);
+  --color-texto-fraco: var(--mui-palette-text-secondary);
+}

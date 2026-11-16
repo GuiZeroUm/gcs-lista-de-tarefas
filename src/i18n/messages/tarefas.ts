@@ -1,0 +1,27 @@
+export const tarefas = {
+  titulo: "Minhas tarefas",
+  novaTarefa: "Nova tarefa",
+  editarTarefa: "Editar tarefa",
+  campoTitulo: "Título",
+  campoDescricao: "Descrição (opcional)",
+  campoPrioridade: "Prioridade",
+  botaoAdicionar: "Adicionar",
+  marcarComoConcluida: "Marcar como concluída",
+  marcarComoPendente: "Marcar como pendente",
+  editar: "Editar",
+  listaVazia: "Nenhuma tarefa por aqui. Que tal criar a primeira?",
+  confirmarExclusao: "Excluir a tarefa",
+  confirmarExclusaoDetalhe: "Esta ação não pode ser desfeita.",
+  resumo: (concluidas: number, total: number) => `${concluidas} de ${total} concluídas`,
+  prioridades: {
+    alta: "Alta",
+    media: "Média",
+    baixa: "Baixa",
+  },
+  validacao: {
+    tituloObrigatorio: "Informe um título.",
+    tituloLongo: "O título pode ter no máximo 120 caracteres.",
+    descricaoLonga: "A descrição pode ter no máximo 1000 caracteres.",
+    prioridadeInvalida: "Escolha uma prioridade válida.",
+  },
+} as const;

@@ -1,0 +1,1 @@
+export const LIMITE_DE_TAREFAS_LISTADAS = 500;
