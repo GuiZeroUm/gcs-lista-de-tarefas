@@ -62,10 +62,11 @@
 
 - Formulário **Nova tarefa**: título, descrição (opcional), prioridade e prazo (opcional).
 - Resumo "X de Y concluídas" com barra de progresso.
+- Abas **Todas (n)**, **Pendentes (n)** e **Concluídas (n)**. O filtro é aplicado no navegador, sobre a lista já carregada, sem nova consulta ao banco (condição do CCB na RFC-02).
 - Lista ordenada: pendentes primeiro; depois prioridade (alta → baixa); depois as mais recentes.
 - Cada item: caixa para concluir, título, descrição, etiqueta de prioridade, etiqueta de prazo, etiqueta **Atrasada** (se for o caso), botões **Editar** (abre diálogo) e **Excluir** (pede confirmação).
 - Botão **Sair** no topo.
-- Lista vazia: "Nenhuma tarefa por aqui. Que tal criar a primeira?"
+- Lista vazia: "Nenhuma tarefa por aqui. Que tal criar a primeira?". Filtro vazio: "Nenhuma tarefa pendente. Tudo em dia!" ou "Nenhuma tarefa concluída ainda."
 
 **Critérios de aceite**
 - [x] Sem login, a tela não mostra tarefas e leva para `/entrar/`.
@@ -77,6 +78,8 @@
 - [x] Um usuário nunca vê nem altera tarefa de outro (RLS).
 - [x] Prazo opcional ao criar e editar; exibido em dd/mm/aaaa (RFC-01).
 - [x] Pendente com prazo vencido mostra "Atrasada"; prazo de hoje e tarefa concluída não (RFC-01).
+- [x] Abas Todas/Pendentes/Concluídas com contagem, sem nova consulta ao banco (RFC-02).
+- [x] Filtro vazio mostra mensagem própria (RFC-02).
 
 ## 4. Fluxos especiais
 
@@ -98,3 +101,5 @@ Somente pt-BR. Textos em `src/i18n/messages/`.
 |---|---|---|
 | 1.0.0 | Login + CRUD de tarefas | Requisitos do enunciado |
 | 1.1.0 | Prazo e destaque de atrasadas | RFC-01 (#5), aprovada pelo CCB |
+| 1.2.0 | Filtro por situação | RFC-02 (#6), aprovada com condições pelo CCB |
+| — | Exportar CSV (adiada) e compartilhar tarefas (rejeitada) | RFC-03 (#7) e RFC-04 (#8) |

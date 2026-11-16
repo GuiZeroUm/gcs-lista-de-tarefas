@@ -4,6 +4,15 @@ Todas as mudanças relevantes deste projeto. Formato baseado em [Keep a Changelo
 
 ## [Não lançado]
 
+## [1.2.0] — 2026-11-16 — Linha de base LB-3 (entrega)
+
+### Adicionado
+- Abas **Todas**, **Pendentes** e **Concluídas** com contagem acima da lista (RFC-02, #6).
+- Mensagem própria quando o filtro escolhido não tem tarefas (RFC-02, #6).
+
+### Notas
+- Condições do CCB atendidas: o filtro roda no cliente, sem nova consulta ao Supabase (teste automatizado), e a cobertura ficou em 98% das linhas.
+
 ## [1.1.0] — 2026-11-16 — Linha de base LB-2
 
 ### Adicionado

@@ -19,7 +19,7 @@ Lista de tarefas pessoal com login, feita para o trabalho prático de **Gerênci
 - Cadastro, login e logout com **Supabase Auth** (e-mail e senha).
 - Área protegida `/tarefas/`: sem login, a pessoa é levada para a tela de entrada.
 - **CRUD de tarefas** (criar, listar, editar, concluir e excluir) com título, descrição, prioridade e prazo, guardado no **PostgreSQL do Supabase**.
-- Destaque de tarefas atrasadas (prazo vencido).
+- Filtro por situação (todas, pendentes, concluídas) com contagem e destaque de tarefas atrasadas.
 - Isolamento por usuário garantido no banco por **Row Level Security**.
 - Tema claro, escuro ou automático.
 
