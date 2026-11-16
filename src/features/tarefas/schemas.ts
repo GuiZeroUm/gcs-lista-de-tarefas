@@ -19,6 +19,11 @@ export const esquemaDosDadosDaTarefa = z.object({
     .max(TAMANHO_MAXIMO_DA_DESCRICAO, mensagens.descricaoLonga)
     .transform((texto) => (texto === "" ? null : texto)),
   prioridade: z.enum(PRIORIDADES, mensagens.prioridadeInvalida),
+  prazo: z
+    .string()
+    .trim()
+    .transform((texto) => (texto === "" ? null : texto))
+    .pipe(z.iso.date(mensagens.prazoInvalido).nullable()),
 });
 
 export const esquemaDaLinhaDoBanco = z
@@ -28,6 +33,7 @@ export const esquemaDaLinhaDoBanco = z
     descricao: z.string().nullable(),
     prioridade: z.enum(PRIORIDADES),
     concluida: z.boolean(),
+    prazo: z.string().nullable(),
     criada_em: z.string(),
   })
   .transform(
@@ -37,6 +43,7 @@ export const esquemaDaLinhaDoBanco = z
       descricao: linha.descricao,
       prioridade: linha.prioridade,
       concluida: linha.concluida,
+      prazo: linha.prazo,
       criadaEm: linha.criada_em,
     }),
   );

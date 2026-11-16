@@ -10,10 +10,13 @@ import { PRIORIDADES, type DadosDaTarefa, type Prioridade } from "../types";
 
 const TEXTOS = textos.tarefas;
 
+type ErrosDosCampos = Partial<Record<keyof DadosDaTarefa, string>>;
+
 export const VALORES_DE_UMA_NOVA_TAREFA: DadosDaTarefa = {
   titulo: "",
   descricao: null,
   prioridade: "media",
+  prazo: null,
 };
 
 type Propriedades = {
@@ -32,17 +35,18 @@ export function FormularioDeTarefa({
   const [titulo, setTitulo] = useState(valoresIniciais.titulo);
   const [descricao, setDescricao] = useState(valoresIniciais.descricao ?? "");
   const [prioridade, setPrioridade] = useState<Prioridade>(valoresIniciais.prioridade);
-  const [erroDoTitulo, setErroDoTitulo] = useState<string | null>(null);
+  const [prazo, setPrazo] = useState(valoresIniciais.prazo ?? "");
+  const [errosDosCampos, setErrosDosCampos] = useState<ErrosDosCampos>({});
   const [estaSalvando, setEstaSalvando] = useState(false);
 
   async function enviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
-    const validacao = esquemaDosDadosDaTarefa.safeParse({ titulo, descricao, prioridade });
+    const validacao = esquemaDosDadosDaTarefa.safeParse({ titulo, descricao, prioridade, prazo });
     if (!validacao.success) {
-      setErroDoTitulo(validacao.error.issues[0].message);
+      setErrosDosCampos(agruparErrosPorCampo(validacao.error.issues));
       return;
     }
-    setErroDoTitulo(null);
+    setErrosDosCampos({});
     setEstaSalvando(true);
     const salvou = await aoSalvar(validacao.data);
     setEstaSalvando(false);
@@ -50,6 +54,7 @@ export function FormularioDeTarefa({
       setTitulo("");
       setDescricao("");
       setPrioridade(VALORES_DE_UMA_NOVA_TAREFA.prioridade);
+      setPrazo("");
     }
   }
 
@@ -59,8 +64,8 @@ export function FormularioDeTarefa({
         label={TEXTOS.campoTitulo}
         value={titulo}
         onChange={(evento) => setTitulo(evento.target.value)}
-        error={erroDoTitulo !== null}
-        helperText={erroDoTitulo}
+        error={Boolean(errosDosCampos.titulo)}
+        helperText={errosDosCampos.titulo}
         slotProps={{ htmlInput: { maxLength: TAMANHO_MAXIMO_DO_TITULO } }}
         required
       />
@@ -70,6 +75,8 @@ export function FormularioDeTarefa({
         onChange={(evento) => setDescricao(evento.target.value)}
         multiline
         minRows={2}
+        error={Boolean(errosDosCampos.descricao)}
+        helperText={errosDosCampos.descricao}
       />
       <TextField
         select
@@ -83,9 +90,27 @@ export function FormularioDeTarefa({
           </MenuItem>
         ))}
       </TextField>
+      <TextField
+        type="date"
+        label={TEXTOS.campoPrazo}
+        value={prazo}
+        onChange={(evento) => setPrazo(evento.target.value)}
+        error={Boolean(errosDosCampos.prazo)}
+        helperText={errosDosCampos.prazo}
+        slotProps={{ inputLabel: { shrink: true } }}
+      />
       <Button type="submit" variant="contained" disabled={estaSalvando}>
         {rotuloDoBotao}
       </Button>
     </form>
   );
+}
+
+function agruparErrosPorCampo(problemas: { path: PropertyKey[]; message: string }[]): ErrosDosCampos {
+  const erros: ErrosDosCampos = {};
+  for (const problema of problemas) {
+    const campo = problema.path[0] as keyof DadosDaTarefa;
+    erros[campo] ??= problema.message;
+  }
+  return erros;
 }

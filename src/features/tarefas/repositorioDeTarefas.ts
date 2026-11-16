@@ -24,6 +24,7 @@ function converterAlteracao(alteracao: AlteracaoDaTarefa) {
     descricao: alteracao.descricao,
     prioridade: alteracao.prioridade,
     concluida: alteracao.concluida,
+    prazo: alteracao.prazo,
   };
 }
 

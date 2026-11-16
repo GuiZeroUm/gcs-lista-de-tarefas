@@ -15,39 +15,56 @@ describe("validação dos dados da tarefa", () => {
       titulo: "  Estudar GCS  ",
       descricao: "  Revisar baselines ",
       prioridade: "alta",
+      prazo: "2026-12-01",
     });
-    expect(dados).toEqual({ titulo: "Estudar GCS", descricao: "Revisar baselines", prioridade: "alta" });
+    expect(dados).toEqual({
+      titulo: "Estudar GCS",
+      descricao: "Revisar baselines",
+      prioridade: "alta",
+      prazo: "2026-12-01",
+    });
+  });
+
+  test("prazo vazio vira nulo", () => {
+    const dados = esquemaDosDadosDaTarefa.parse({ titulo: "Ler", descricao: "", prioridade: "baixa", prazo: "" });
+    expect(dados.prazo).toBeNull();
+  });
+
+  test("prazo com data inexistente é recusado", () => {
+    expect(primeiraMensagem({ titulo: "Ok", descricao: "", prioridade: "media", prazo: "2026-02-30" })).toBe(
+      MENSAGENS.prazoInvalido,
+    );
   });
 
   test("descrição vazia vira nula", () => {
-    const dados = esquemaDosDadosDaTarefa.parse({ titulo: "Ler", descricao: "   ", prioridade: "baixa" });
+    const dados = esquemaDosDadosDaTarefa.parse({ titulo: "Ler", descricao: "   ", prioridade: "baixa", prazo: "" });
     expect(dados.descricao).toBeNull();
   });
 
   test("título só com espaços é recusado", () => {
-    expect(primeiraMensagem({ titulo: "   ", descricao: "", prioridade: "media" })).toBe(
+    expect(primeiraMensagem({ titulo: "   ", descricao: "", prioridade: "media", prazo: "" })).toBe(
       MENSAGENS.tituloObrigatorio,
     );
   });
 
   test("título com mais de 120 caracteres é recusado", () => {
-    expect(primeiraMensagem({ titulo: "a".repeat(121), descricao: "", prioridade: "media" })).toBe(
+    expect(primeiraMensagem({ titulo: "a".repeat(121), descricao: "", prioridade: "media", prazo: "" })).toBe(
       MENSAGENS.tituloLongo,
     );
   });
 
   test("título com exatamente 120 caracteres é aceito", () => {
-    expect(primeiraMensagem({ titulo: "a".repeat(120), descricao: "", prioridade: "media" })).toBeNull();
+    expect(primeiraMensagem({ titulo: "a".repeat(120), descricao: "", prioridade: "media", prazo: "" })).toBeNull();
   });
 
   test("descrição com mais de 1000 caracteres é recusada", () => {
-    expect(primeiraMensagem({ titulo: "Ok", descricao: "b".repeat(1001), prioridade: "media" })).toBe(
+    expect(primeiraMensagem({ titulo: "Ok", descricao: "b".repeat(1001), prioridade: "media", prazo: "" })).toBe(
       MENSAGENS.descricaoLonga,
     );
   });
 
   test("prioridade fora da lista é recusada", () => {
-    expect(primeiraMensagem({ titulo: "Ok", descricao: "", prioridade: "urgente" })).toBe(
+    expect(primeiraMensagem({ titulo: "Ok", descricao: "", prioridade: "urgente", prazo: "" })).toBe(
       MENSAGENS.prioridadeInvalida,
     );
   });
@@ -62,6 +79,7 @@ describe("leitura da linha do banco", () => {
       descricao: null,
       prioridade: "media",
       concluida: true,
+      prazo: "2026-11-20",
       criada_em: "2026-11-16T12:00:00Z",
     });
     expect(tarefa).toEqual({
@@ -70,6 +88,7 @@ describe("leitura da linha do banco", () => {
       descricao: null,
       prioridade: "media",
       concluida: true,
+      prazo: "2026-11-20",
       criadaEm: "2026-11-16T12:00:00Z",
     });
   });

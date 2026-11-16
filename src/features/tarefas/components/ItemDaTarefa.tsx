@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { textos } from "@/i18n/textos";
+import { formatarData, obterDataDeHoje } from "@/lib/datas";
+import { estaAtrasada } from "../rules/estaAtrasada";
 import type { Prioridade, Tarefa } from "../types";
 
 const TEXTOS = textos.tarefas;
@@ -56,6 +58,12 @@ export function ItemDaTarefa({ tarefa, aoAlternarConclusao, aoEditar, aoExcluir 
             label={TEXTOS.prioridades[tarefa.prioridade]}
             color={COR_DA_PRIORIDADE[tarefa.prioridade]}
           />
+          {tarefa.prazo && (
+            <Chip size="small" variant="outlined" label={TEXTOS.prazo(formatarData(tarefa.prazo))} />
+          )}
+          {estaAtrasada(tarefa, obterDataDeHoje()) && (
+            <Chip size="small" color="error" label={TEXTOS.atrasada} />
+          )}
         </div>
       </div>
       <IconButton aria-label={`${TEXTOS.editar}: ${tarefa.titulo}`} onClick={() => aoEditar(tarefa)}>

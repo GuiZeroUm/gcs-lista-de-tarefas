@@ -4,6 +4,16 @@ Todas as mudanças relevantes deste projeto. Formato baseado em [Keep a Changelo
 
 ## [Não lançado]
 
+## [1.1.0] — 2026-11-16 — Linha de base LB-2
+
+### Adicionado
+- Prazo opcional nas tarefas (campo de data ao criar e editar), exibido como dd/mm/aaaa (RFC-01, #5).
+- Destaque "Atrasada" para tarefas pendentes com prazo vencido, considerando o dia local (RFC-01, #5).
+- Migração `20261116170000_adicionar_prazo_das_tarefas.sql` (coluna `prazo date`, aditiva) (RFC-01, #5).
+
+### Alterado
+- Erros de validação do formulário aparecem no próprio campo (título, descrição ou prazo).
+
 ## [1.0.0] — 2026-11-16 — Linha de base LB-1 (funcional)
 
 ### Adicionado

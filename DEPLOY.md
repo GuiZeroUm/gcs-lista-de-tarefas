@@ -23,6 +23,7 @@ Navegador ──► GitHub Pages (HTML/JS) ──► Supabase Auth + PostgreSQL 
 1. No projeto, abra **SQL Editor → New query**.
 2. Cole e execute (**Run**), **em ordem**, cada arquivo de `supabase/migrations/`:
    - `20261116150000_criar_tabela_tarefas.sql`: tabela `tarefas`, índice, gatilho de `atualizada_em` e políticas RLS.
+   - `20261116170000_adicionar_prazo_das_tarefas.sql`: coluna `prazo` (RFC-01).
 3. O Supabase avisa sobre "destructive operations" por causa dos `drop ... if exists`. Os scripts são **idempotentes**: rodar duas vezes dá no mesmo resultado. Confirme em **Run query**.
 4. Confira em **Table Editor → tarefas** que a tabela existe e que **RLS enabled** aparece.
 

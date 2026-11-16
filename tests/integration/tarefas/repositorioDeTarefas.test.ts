@@ -8,7 +8,7 @@ import {
 import { ErroDeNegocio } from "@/lib/erros";
 import { supabase } from "../../support/usarSupabaseFalso";
 
-const NOVA = { titulo: "Estudar Git", descricao: null, prioridade: "alta" as const };
+const NOVA = { titulo: "Estudar Git", descricao: null, prioridade: "alta" as const, prazo: null };
 
 beforeEach(() => {
   supabase.atual.cadastrarUsuario("ana@exemplo.com", "senha123");
@@ -34,6 +34,13 @@ describe("CRUD de tarefas no Supabase", () => {
     const criada = await criarTarefa(NOVA);
     const editada = await atualizarTarefa(criada.id, { titulo: "Estudar Git e GitHub", concluida: true });
     expect(editada).toMatchObject({ id: criada.id, titulo: "Estudar Git e GitHub", concluida: true, prioridade: "alta" });
+  });
+
+  test("salva e altera o prazo", async () => {
+    const criada = await criarTarefa({ ...NOVA, prazo: "2026-12-24" });
+    expect(criada.prazo).toBe("2026-12-24");
+    const semPrazo = await atualizarTarefa(criada.id, { prazo: null });
+    expect(semPrazo.prazo).toBeNull();
   });
 
   test("exclui a tarefa", async () => {

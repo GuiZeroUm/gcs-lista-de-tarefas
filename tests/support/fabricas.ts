@@ -10,6 +10,7 @@ export function criarTarefaDeExemplo(campos: Partial<Tarefa> = {}): Tarefa {
     descricao: null,
     prioridade: "media",
     concluida: false,
+    prazo: null,
     criadaEm: "2026-11-16T12:00:00Z",
     ...campos,
   };

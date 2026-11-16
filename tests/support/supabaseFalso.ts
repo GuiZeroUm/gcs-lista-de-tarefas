@@ -6,7 +6,7 @@ type Sessao = { user: { id: string; email: string } } | null;
 type OuvinteDeSessao = (evento: string, sessao: Sessao) => void;
 type Usuario = { id: string; email: string; senha: string };
 
-const COLUNAS_PADRAO = { descricao: null, prioridade: "media", concluida: false };
+const COLUNAS_PADRAO = { descricao: null, prioridade: "media", concluida: false, prazo: null };
 
 class ConsultaFalsa implements PromiseLike<Resposta> {
   private filtroPorId: string | null = null;

@@ -8,10 +8,11 @@ export type Tarefa = {
   descricao: string | null;
   prioridade: Prioridade;
   concluida: boolean;
+  prazo: string | null;
   criadaEm: string;
 };
 
-export type DadosDaTarefa = Pick<Tarefa, "titulo" | "descricao" | "prioridade">;
+export type DadosDaTarefa = Pick<Tarefa, "titulo" | "descricao" | "prioridade" | "prazo">;
 
 export type AlteracaoDaTarefa = Partial<DadosDaTarefa & Pick<Tarefa, "concluida">>;
 

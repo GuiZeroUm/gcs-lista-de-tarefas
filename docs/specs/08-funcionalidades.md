@@ -13,6 +13,8 @@
 | Dono | Usuário que criou a tarefa (`tarefas.usuario_id`) |
 | Prioridade | `alta`, `media` ou `baixa` (`tarefas.prioridade`) |
 | Concluída | Tarefa marcada como feita (`tarefas.concluida`) |
+| Prazo | Data limite opcional, sem hora (`tarefas.prazo`, tipo `date`) |
+| Atrasada | Pendente com prazo **anterior** ao dia local de hoje (prazo de hoje não atrasa) |
 
 ### 1.2 Perfis e permissões
 
@@ -29,6 +31,7 @@
 | Tamanho do título | 1 a 120 caracteres (sem espaços nas pontas) | Formulário (zod) e `check` no banco |
 | Tamanho da descrição | até 1000 caracteres; vazia vira `null` | Formulário (zod) e `check` no banco |
 | Prioridade padrão | `media` | Formulário e `default` no banco |
+| Prazo | data válida `AAAA-MM-DD` ou vazio (vira `null`); exibido `dd/mm/aaaa` | Formulário (zod) e coluna `date` |
 | Senha no cadastro | mínimo 8 caracteres, com letras e números | zod + configuração do Supabase Auth |
 | `LIMITE_DE_TAREFAS_LISTADAS` | 500 | Consulta da lista |
 
@@ -57,10 +60,10 @@
 
 ### 3.2 Minhas tarefas — `/tarefas/`
 
-- Formulário **Nova tarefa**: título, descrição (opcional) e prioridade.
+- Formulário **Nova tarefa**: título, descrição (opcional), prioridade e prazo (opcional).
 - Resumo "X de Y concluídas" com barra de progresso.
 - Lista ordenada: pendentes primeiro; depois prioridade (alta → baixa); depois as mais recentes.
-- Cada item: caixa para concluir, título, descrição, etiqueta de prioridade, botões **Editar** (abre diálogo) e **Excluir** (pede confirmação).
+- Cada item: caixa para concluir, título, descrição, etiqueta de prioridade, etiqueta de prazo, etiqueta **Atrasada** (se for o caso), botões **Editar** (abre diálogo) e **Excluir** (pede confirmação).
 - Botão **Sair** no topo.
 - Lista vazia: "Nenhuma tarefa por aqui. Que tal criar a primeira?"
 
@@ -72,6 +75,8 @@
 - [x] Concluir atualiza o banco e o resumo.
 - [x] Excluir só depois de confirmar; cancelar mantém a tarefa.
 - [x] Um usuário nunca vê nem altera tarefa de outro (RLS).
+- [x] Prazo opcional ao criar e editar; exibido em dd/mm/aaaa (RFC-01).
+- [x] Pendente com prazo vencido mostra "Atrasada"; prazo de hoje e tarefa concluída não (RFC-01).
 
 ## 4. Fluxos especiais
 
@@ -92,3 +97,4 @@ Somente pt-BR. Textos em `src/i18n/messages/`.
 | Versão | Mudança | Origem |
 |---|---|---|
 | 1.0.0 | Login + CRUD de tarefas | Requisitos do enunciado |
+| 1.1.0 | Prazo e destaque de atrasadas | RFC-01 (#5), aprovada pelo CCB |
