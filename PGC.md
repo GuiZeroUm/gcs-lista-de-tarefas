@@ -43,7 +43,7 @@ Como o trabalho é individual, a mesma pessoa acumula os papéis, mas cada papel
 | IC-07 | Documentação de GCS | `PGC.md`, `ATA_CCB.md`, `CHANGELOG.md` | |
 | IC-08 | Documentação técnica | `README.md`, `DEPLOY.md`, `docs/ARQUITETURA.md`, `docs/specs/` | |
 | IC-09 | Modelos de processo | `.github/ISSUE_TEMPLATE/`, `.github/pull_request_template.md` | Padronizam RFCs e revisões |
-| IC-10 | Documento final | `docs/DOCUMENTO_FINAL.pdf` | Gerado a partir de `docs/DOCUMENTO_FINAL.md` |
+| IC-10 | Documento final | `docs/DOCUMENTO_FINAL.pdf` | Gerado a partir de `docs/DOCUMENTO_FINAL.md` por `bun run docs:pdf` (`scripts/gerarDocumentoFinal.ts`); prints em `docs/evidencias/` |
 
 **Não são ICs** (ficam fora do Git pelo `.gitignore`): `node_modules/`, `.next/`, `out/`, `coverage/` e qualquer `.env*` com valores reais. Relatórios gerados são publicados como **artefatos do pipeline**.
 

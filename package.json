@@ -9,7 +9,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "check": "bun run lint && bun run typecheck && bun run test"
+    "check": "bun run lint && bun run typecheck && bun run test",
+    "docs:pdf": "bun scripts/gerarDocumentoFinal.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -37,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "jsdom": "^31.0.1",
+    "marked": "^17.0.6",
     "tailwindcss": "4.3.3",
     "typescript": "^5",
     "vitest": "^5.1.0"

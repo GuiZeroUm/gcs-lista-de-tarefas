@@ -4,6 +4,10 @@ Todas as mudanças relevantes deste projeto. Formato baseado em [Keep a Changelo
 
 ## [Não lançado]
 
+### Documentação
+- Documento final (`docs/DOCUMENTO_FINAL.md` e `.pdf`) com uma seção por fase, Kanban, ata do CCB, auditorias FCA/PCA, rastreabilidade e roteiro do vídeo (#13).
+- Evidências em `docs/evidencias/` e script `bun run docs:pdf`, que gera o PDF de forma reproduzível.
+
 ## [1.2.0] — 2026-11-16 — Linha de base LB-3 (entrega)
 
 ### Adicionado

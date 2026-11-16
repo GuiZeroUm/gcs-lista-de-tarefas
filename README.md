@@ -8,7 +8,7 @@ Lista de tarefas pessoal com login, feita para o trabalho prático de **Gerênci
 |---|---|
 | **App no ar** | https://guizeroum.github.io/gcs-lista-de-tarefas/ |
 | **Repositório** | https://github.com/GuiZeroUm/gcs-lista-de-tarefas |
-| **Kanban das issues** | https://github.com/users/GuiZeroUm/projects (projeto "GCS — Minhas Tarefas") |
+| **Kanban das issues** | https://github.com/users/GuiZeroUm/projects/1 |
 | **Pipeline** | https://github.com/GuiZeroUm/gcs-lista-de-tarefas/actions |
 | **Documento final** | [docs/DOCUMENTO_FINAL.pdf](docs/DOCUMENTO_FINAL.pdf) |
 
