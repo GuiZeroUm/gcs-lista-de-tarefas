@@ -1,6 +1,5 @@
-import Typography from "@mui/material/Typography";
-import { textos } from "@/i18n/textos";
+import { PainelDeTarefas } from "@/features/tarefas/components/PainelDeTarefas";
 
 export default function PaginaDeTarefas() {
-  return <Typography variant="h2">{textos.tarefas.titulo}</Typography>;
+  return <PainelDeTarefas />;
 }
