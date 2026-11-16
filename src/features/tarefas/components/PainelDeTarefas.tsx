@@ -9,8 +9,10 @@ import { DialogoDeConfirmacao } from "@/components/ui/DialogoDeConfirmacao";
 import { IndicadorDeCarregamento } from "@/components/ui/IndicadorDeCarregamento";
 import { textos } from "@/i18n/textos";
 import { useTarefas } from "../hooks/useTarefas";
+import { contarPorSituacao, filtrarTarefas } from "../rules/filtrarTarefas";
 import { resumirTarefas } from "../rules/resumirTarefas";
-import type { Tarefa } from "../types";
+import type { FiltroDeSituacao, Tarefa } from "../types";
+import { AbasDeSituacao } from "./AbasDeSituacao";
 import { DialogoDeEdicao } from "./DialogoDeEdicao";
 import { FormularioDeTarefa } from "./FormularioDeTarefa";
 import { ListaDeTarefas } from "./ListaDeTarefas";
@@ -21,6 +23,7 @@ export function PainelDeTarefas() {
   const { tarefas, estaCarregando, mensagemDeErro, adicionar, alterar, remover } = useTarefas();
   const [tarefaEmEdicao, setTarefaEmEdicao] = useState<Tarefa | null>(null);
   const [tarefaParaExcluir, setTarefaParaExcluir] = useState<Tarefa | null>(null);
+  const [filtro, setFiltro] = useState<FiltroDeSituacao>("todas");
   const resumo = resumirTarefas(tarefas);
 
   async function confirmarExclusao() {
@@ -43,11 +46,13 @@ export function PainelDeTarefas() {
           </Typography>
         </div>
         <LinearProgress variant="determinate" value={resumo.percentualConcluido} />
+        <AbasDeSituacao filtro={filtro} quantidades={contarPorSituacao(tarefas)} aoMudar={setFiltro} />
         {estaCarregando ? (
           <IndicadorDeCarregamento />
         ) : (
           <ListaDeTarefas
-            tarefas={tarefas}
+            tarefas={filtrarTarefas(tarefas, filtro)}
+            mensagemDeListaVazia={TEXTOS.listaVaziaNoFiltro[filtro]}
             aoAlternarConclusao={(tarefa) => alterar(tarefa.id, { concluida: !tarefa.concluida })}
             aoEditar={setTarefaEmEdicao}
             aoExcluir={setTarefaParaExcluir}

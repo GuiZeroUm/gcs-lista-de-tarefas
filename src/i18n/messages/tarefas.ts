@@ -12,7 +12,17 @@ export const tarefas = {
   marcarComoConcluida: "Marcar como concluída",
   marcarComoPendente: "Marcar como pendente",
   editar: "Editar",
-  listaVazia: "Nenhuma tarefa por aqui. Que tal criar a primeira?",
+  filtros: {
+    todas: "Todas",
+    pendentes: "Pendentes",
+    concluidas: "Concluídas",
+  },
+  rotuloDoFiltro: (nome: string, quantidade: number) => `${nome} (${quantidade})`,
+  listaVaziaNoFiltro: {
+    todas: "Nenhuma tarefa por aqui. Que tal criar a primeira?",
+    pendentes: "Nenhuma tarefa pendente. Tudo em dia!",
+    concluidas: "Nenhuma tarefa concluída ainda.",
+  },
   confirmarExclusao: "Excluir a tarefa",
   confirmarExclusaoDetalhe: "Esta ação não pode ser desfeita.",
   resumo: (concluidas: number, total: number) => `${concluidas} de ${total} concluídas`,

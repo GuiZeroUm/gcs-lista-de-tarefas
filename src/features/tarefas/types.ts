@@ -2,6 +2,10 @@ export const PRIORIDADES = ["alta", "media", "baixa"] as const;
 
 export type Prioridade = (typeof PRIORIDADES)[number];
 
+export const FILTROS_DE_SITUACAO = ["todas", "pendentes", "concluidas"] as const;
+
+export type FiltroDeSituacao = (typeof FILTROS_DE_SITUACAO)[number];
+
 export type Tarefa = {
   id: string;
   titulo: string;
