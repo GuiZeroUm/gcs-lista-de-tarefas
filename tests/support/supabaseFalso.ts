@@ -60,6 +60,7 @@ export class SupabaseFalso {
   linhas: LinhaDaTarefa[] = [];
   usuarios: Usuario[] = [];
   sessao: Sessao = null;
+  quantidadeDeConsultas = 0;
   proximoErro: Resposta["error"] = null;
   erroDeAutenticacao: { code: string; message: string } | null = null;
   private ouvintes = new Set<OuvinteDeSessao>();
@@ -93,6 +94,7 @@ export class SupabaseFalso {
   };
 
   from() {
+    this.quantidadeDeConsultas += 1;
     return {
       select: () => new ConsultaFalsa(this, "select"),
       insert: (valores: Record<string, unknown>) => new ConsultaFalsa(this, "insert", valores),

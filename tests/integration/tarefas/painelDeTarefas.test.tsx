@@ -32,7 +32,7 @@ beforeEach(() => {
 describe("tela de tarefas (CRUD de ponta a ponta com Supabase simulado)", () => {
   test("lista vazia mostra convite para criar a primeira tarefa", async () => {
     await abrirPainel();
-    expect(screen.getByText(TEXTOS.listaVazia)).toBeInTheDocument();
+    expect(screen.getByText(TEXTOS.listaVaziaNoFiltro.todas)).toBeInTheDocument();
     expect(screen.getByText(TEXTOS.resumo(0, 0))).toBeInTheDocument();
   });
 
@@ -71,6 +71,32 @@ describe("tela de tarefas (CRUD de ponta a ponta com Supabase simulado)", () => 
     supabase.atual.executarOperacao("insert", { titulo: "Vencida", prazo: "2020-01-10" }, null);
     await abrirPainel();
     expect(within(lista()).getByText(TEXTOS.atrasada)).toBeInTheDocument();
+  });
+
+  test("filtra por situação sem consultar o banco de novo", async () => {
+    supabase.atual.executarOperacao("insert", { titulo: "A fazer" }, null);
+    supabase.atual.executarOperacao("insert", { titulo: "Feita", concluida: true }, null);
+    await abrirPainel();
+    const consultasAoAbrir = supabase.atual.quantidadeDeConsultas;
+
+    await userEvent.click(screen.getByRole("tab", { name: TEXTOS.rotuloDoFiltro(TEXTOS.filtros.pendentes, 1) }));
+    expect(within(lista()).getByText("A fazer")).toBeInTheDocument();
+    expect(within(lista()).queryByText("Feita")).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("tab", { name: TEXTOS.rotuloDoFiltro(TEXTOS.filtros.concluidas, 1) }));
+    expect(within(lista()).getByText("Feita")).toBeInTheDocument();
+    expect(within(lista()).queryByText("A fazer")).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("tab", { name: TEXTOS.rotuloDoFiltro(TEXTOS.filtros.todas, 2) }));
+    expect(within(lista()).getAllByRole("listitem")).toHaveLength(2);
+    expect(supabase.atual.quantidadeDeConsultas).toBe(consultasAoAbrir);
+  });
+
+  test("filtro sem resultados mostra mensagem própria", async () => {
+    supabase.atual.executarOperacao("insert", { titulo: "Só pendente" }, null);
+    await abrirPainel();
+    await userEvent.click(screen.getByRole("tab", { name: TEXTOS.rotuloDoFiltro(TEXTOS.filtros.concluidas, 0) }));
+    expect(screen.getByText(TEXTOS.listaVaziaNoFiltro.concluidas)).toBeInTheDocument();
   });
 
   test("título vazio não é enviado ao banco", async () => {
@@ -114,7 +140,7 @@ describe("tela de tarefas (CRUD de ponta a ponta com Supabase simulado)", () => 
     await userEvent.click(screen.getByRole("button", { name: `${textos.comum.excluir}: Apagar depois` }));
     const dialogo = await screen.findByRole("dialog");
     await userEvent.click(within(dialogo).getByRole("button", { name: textos.comum.excluir }));
-    await screen.findByText(TEXTOS.listaVazia);
+    await screen.findByText(TEXTOS.listaVaziaNoFiltro.todas);
     expect(supabase.atual.linhas).toHaveLength(0);
   });
 
